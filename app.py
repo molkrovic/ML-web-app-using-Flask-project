@@ -1,6 +1,7 @@
 import pickle
 import numpy as np
-from flask import Flask, render_template, request 
+from flask import Flask, render_template, request
+import warnings
 
 app = Flask(__name__, template_folder='')
 
@@ -14,6 +15,7 @@ def home():
 
 @app.route('/predict', methods=['POST'])
 def predict():
+    warnings.filterwarnings('ignore')
     features = [x for x in request.form.values()]
 
     if features[1].lower() == 'male':
@@ -57,7 +59,7 @@ def predict():
     
     try:
         prediction = modelo.predict(final_features)
-        output = prediction.tolist()[0]
+        output = round(prediction.tolist()[0])
     except:
         output = 'Invalid values'
 
