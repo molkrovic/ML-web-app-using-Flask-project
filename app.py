@@ -40,7 +40,7 @@ def predict():
     else:
         features[9] = 'Valor incorrecto'
 
-    del(features[5])
+    del features[5]
 
     for i in [0, 2, 3]:
         features[i] = float(features[i])
